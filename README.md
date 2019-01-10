@@ -6,7 +6,7 @@ For business purposes like transportation, delivery or for day to day purpose li
 
 This project makes use of google direction API[1] and Darksky weather API[2]. It will find the route between the to
 travel points using google direction api and find the weather condition for that route. 
-Then it summarise the whole weather prediction and give readable instruction to users. 
+Then it will  summarise the whole weather prediction and give readable information to users. 
 
 References : 
 * [1] Google Direction API: https://developers.google.com/maps/documentation/directions/start
