@@ -4,31 +4,8 @@ import ballerina/log;
 
 
 string weatherAddress = "https://api.darksky.net/forecast";
-string weatherApiKey = "b5ac752055fa6b6d05ef7c2a698b276f";
+string weatherApiKey = weatherAPIKey;
 http:Client weatherClientEndpoint = new(weatherAddress);
-
-string[][] inputt = [["6.8301108", "79.88002929999999", "1547035899", "1620"], ["6.8320621", "79.879769", "1547035959",
-"60"], ["6.8317496", "79.87285659999999", "1547036079", "120"]];
-
-//public function main() {
-//    //var response = weatherClientEndpoint->get("/b5ac752055fa6b6d05ef7c2a698b276f/37.8267,-122.4233");
-//    //if (response is http:Response) {
-//    //   io:print( response.getJsonPayload());
-//    //}
-//
-//    getWeatherResult("6.8301108", "79.88002929999999", "1547032927");
-//
-//}
-
-//public function main() {
-//    //string ans = getWeatherResult("6.8301108", "79.88002929999999", "1547032927");
-//    //getWeatherTotalPrediction([["6.8301108", "79.88002929999999", "1547032927"], ["6.8320621", "79.879769", "1547032987"], ["6.8317496", "79.87285659999999", "1547033107"]]);
-//    //getWeatherTotalPrediction(inputt);
-//    //getTotalTime(inputt);
-//    string[] weatherForcast = getWeatherTotalPrediction(inputt);
-//    int[] timeArray = getTotalTime(inputt);
-//    findBadWeather(weatherForcast,timeArray);
-//}
 
 
 public function getWeatherResult(string latitude, string longtitude, string time) returns string {
@@ -93,18 +70,28 @@ public function findBadWeather(string[] weather, int[] duration) {
         }
 
         if (rainTime > 0) {
+            //io:println("raining time is :"+ rainTime);
             int rainPercentage = (rainTime * 100 / duration[0]);
+            if (rainPercentage > 100) {
+                rainPercentage = 100;
+            }
             finalResult = "In the travel-time " + rainPercentage + "% will be rainny.";
         }
         if (windTime > 0) {
             int windPercentage = (windTime * 100 / duration[0]);
+            if (windPercentage > 100) {
+                windPercentage = 100;
+            }
             finalResult = finalResult + "In the travel-time " + windPercentage + "% will be windy.";
         }
         if (snowTime > 0) {
             int snowPercentage = (snowTime * 100 / duration[0]);
+            if (snowPercentage > 100) {
+                snowPercentage = 100;
+            }
             finalResult = finalResult + "In the travel-time " + snowPercentage + "% will be snowy.";
         }
     }
-    finalResult = finalResult + " With expected journey time of " + duration[0] +" mins";
+    finalResult = finalResult + " With expected journey time of " + duration[0] + " mins";
     io:println(finalResult);
 }

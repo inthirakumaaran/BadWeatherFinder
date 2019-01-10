@@ -6,7 +6,7 @@ import ballerina/time;
 string address = "https://maps.googleapis.com/maps/api/directions";
 
 http:Client clientEndpoint = new(address);
-string key = "AIzaSyATIXv5bZtzJXf_T9ee9IdU1QsKHFtDbXA";
+string key = googleDirectionAPIKey;
 
 string startAddress = "";
 string destination = "";
@@ -55,6 +55,8 @@ public function findMode() {
         //io:println(response.getJsonPayload());
         var responseLoad = response.getJsonPayload();
         if (responseLoad is json) {
+            io:println(" ");
+            io:println("Select the mode from");
             io:println(responseLoad.available_travel_modes.toString());
         }
 
@@ -85,13 +87,14 @@ public function findRoute(string modeVal, int delay) returns @untainted string[]
                 int legLength = leg.length();
                 int j = 0;
                 io:println("--------------------------------------------------------------------");
-                io:println("For route "+i+ " through "+responseLoad.routes[i].summary.toString());
+                io:println("For route " + (i + 1) + " through " + responseLoad.routes[i].summary.toString());
+                io:println(" ");
                 string[][] geoPoints = [];
                 while (j < legLength) {
                     geoPoints = [];
                     time:Time time = time:currentTime();
                     int currentTimeMills = (time.time / 1000);
-                    if (delay >0){
+                    if (delay > 0) {
                         currentTimeMills = currentTimeMills + delay;
                     }
                     //io:println(calculateCurrentTime(leg[j].duration.text.toString(), currentTimeMills));

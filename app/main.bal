@@ -26,49 +26,52 @@ public function main() {
                     io:println();
                     i = i + 1;
                 }
-            }
-            io:println("--------------------------------------------------------------------");
+                io:println("--------------------------------------------------------------------");
 
-            boolean delayBoolean = true;
-            while (delayBoolean) {
-                string valContinue = io:readln("Do you want to delay the travel?(yes or no): ");
-                if (valContinue.equalsIgnoreCase("yes") || val.equalsIgnoreCase("y")) {
-                    int|error delayMins = int.convert(io:readln("Enter delay mins :  "));
-                    int|error delayHours = int.convert(io:readln("Enter delay hours :  "));
-                    int|error delayDays = int.convert(io:readln("Enter delay days :  "));
+                boolean delayBoolean = true;
+                while (delayBoolean) {
+                    string valContinue = io:readln("Do you want to delay the travel?(yes or no): ");
+                    if (valContinue.equalsIgnoreCase("yes") || val.equalsIgnoreCase("y")) {
+                        int|error delayMins = int.convert(io:readln("Enter delay mins :  "));
+                        int|error delayHours = int.convert(io:readln("Enter delay hours :  "));
+                        int|error delayDays = int.convert(io:readln("Enter delay days :  "));
 
-                    if (delayDays is int && delayHours is int && delayMins is int) {
-                        int delay = delayDays * 24 * 60 * 60 + delayHours * 60 * 60 + delayMins * 60;
-                        string[][][] newroutes = findRoute(modeVal, delay);
-                        int newrouteLength = newroutes.length();
-                        if (newrouteLength > 0) {
-                            int i = 0;
-                            while (i < newrouteLength) {
-                                string[] weatherForcast = getWeatherTotalPrediction(newroutes[i]);
-                                int[] timeArray = getTotalTime(newroutes[i]);
-                                findBadWeather(weatherForcast, timeArray);
-                                io:println();
-                                i = i + 1;
+                        if (delayDays is int && delayHours is int && delayMins is int) {
+                            int delay = delayDays * 24 * 60 * 60 + delayHours * 60 * 60 + delayMins * 60;
+                            string[][][] newroutes = findRoute(modeVal, delay);
+                            int newrouteLength = newroutes.length();
+                            if (newrouteLength > 0) {
+                                i = 0;
+                                while (i < newrouteLength) {
+                                    string[] weatherForcast = getWeatherTotalPrediction(newroutes[i]);
+                                    int[] timeArray = getTotalTime(newroutes[i]);
+                                    findBadWeather(weatherForcast, timeArray);
+                                    io:println();
+                                    i = i + 1;
+                                }
                             }
-                        }
-                        io:println("--------------------------------------------------------------------");
+                            io:println("--------------------------------------------------------------------");
 
+                        } else {
+                            io:println("enter time properly");
+                        }
+                    }
+                    else if (valContinue.equalsIgnoreCase("no") || val.equalsIgnoreCase("n")) {
+                        delayBoolean = false;
                     } else {
-                        io:println("enter time properly");
+                        io:println("enter yes or no properly");
                     }
                 }
-                else if (valContinue.equalsIgnoreCase("no") || val.equalsIgnoreCase("n")) {
-                    delayBoolean = false;
-                } else {
-                    io:println("enter yes or no properly");
-                }
-
+            } else {
+                io:println("NO routes is selected. Please enter more specific address");
+                getAddress();
+                val = io:readln("Enter Mode: ");
+                falseValue = true;
             }
         }
 
-        io:println(" ");
-        io:println("End of Weather Prediction");
-
     }
+    io:println(" ");
+    io:println("End of Weather Prediction");
 }
 
