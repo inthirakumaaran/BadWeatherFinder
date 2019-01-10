@@ -20,15 +20,15 @@ string[][] inputt = [["6.8301108", "79.88002929999999", "1547035899", "1620"], [
 //
 //}
 
-public function main() {
-    //string ans = getWeatherResult("6.8301108", "79.88002929999999", "1547032927");
-    //getWeatherTotalPrediction([["6.8301108", "79.88002929999999", "1547032927"], ["6.8320621", "79.879769", "1547032987"], ["6.8317496", "79.87285659999999", "1547033107"]]);
-    //getWeatherTotalPrediction(inputt);
-    //getTotalTime(inputt);
-    string[] weatherForcast = getWeatherTotalPrediction(inputt);
-    int[] timeArray = getTotalTime(inputt);
-    findBadWeather(weatherForcast,timeArray);
-}
+//public function main() {
+//    //string ans = getWeatherResult("6.8301108", "79.88002929999999", "1547032927");
+//    //getWeatherTotalPrediction([["6.8301108", "79.88002929999999", "1547032927"], ["6.8320621", "79.879769", "1547032987"], ["6.8317496", "79.87285659999999", "1547033107"]]);
+//    //getWeatherTotalPrediction(inputt);
+//    //getTotalTime(inputt);
+//    string[] weatherForcast = getWeatherTotalPrediction(inputt);
+//    int[] timeArray = getTotalTime(inputt);
+//    findBadWeather(weatherForcast,timeArray);
+//}
 
 
 public function getWeatherResult(string latitude, string longtitude, string time) returns string {
@@ -38,7 +38,7 @@ public function getWeatherResult(string latitude, string longtitude, string time
         var responseLoad = response.getJsonPayload();
         if (responseLoad is json) {
             result = responseLoad.currently.icon.toString();
-            io:println(result);
+            //io:println(result);
         }
     }
     return result;
