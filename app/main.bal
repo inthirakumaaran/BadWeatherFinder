@@ -31,7 +31,7 @@ public function main() {
                 boolean delayBoolean = true;
                 while (delayBoolean) {
                     string valContinue = io:readln("Do you want to delay the travel?(yes or no): ");
-                    if (valContinue.equalsIgnoreCase("yes") || val.equalsIgnoreCase("y")) {
+                    if (valContinue.equalsIgnoreCase("yes") || valContinue.equalsIgnoreCase("y")) {
                         int|error delayMins = int.convert(io:readln("Enter delay mins :  "));
                         int|error delayHours = int.convert(io:readln("Enter delay hours :  "));
                         int|error delayDays = int.convert(io:readln("Enter delay days :  "));
@@ -56,7 +56,7 @@ public function main() {
                             io:println("enter time properly");
                         }
                     }
-                    else if (valContinue.equalsIgnoreCase("no") || val.equalsIgnoreCase("n")) {
+                    else if (valContinue.equalsIgnoreCase("no") || valContinue.equalsIgnoreCase("n")) {
                         delayBoolean = false;
                     } else {
                         io:println("enter yes or no properly");
