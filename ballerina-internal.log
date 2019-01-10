@@ -1,0 +1,2 @@
+[2019-01-08 17:01:26,879] WARN  {org.wso2.transport.http.netty.contractimpl.sender.TargetHandler} - Exception occurred in TargetHandler : Connection reset by peer  
+[2019-01-08 17:01:26,903] ERROR {org.wso2.transport.http.netty.contractimpl.sender.states.RequestCompleted} - Remote host closed the connection before initiating inbound response  
