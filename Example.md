@@ -57,6 +57,13 @@ travel points*
 
 --------------------------------------------------------------------
 *Following will happen if we input wrong queries*
+
+>Select the mode from  
+>["DRIVING", "WALKING"]  
+>Enter Mode:  
+>Enter proper value for modeVal  
+>Enter Mode: swim  
+>Select proper value for modeVal  
  
 >Do you want to delay the travel?(yes or no): yes  
 >Enter delay mins : 
