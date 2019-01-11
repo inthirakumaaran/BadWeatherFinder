@@ -3,6 +3,8 @@ import ballerina/log;
 import ballerina/io;
 import ballerina/time;
 
+// This bal handle the google direciton api
+
 string address = "https://maps.googleapis.com/maps/api/directions";
 
 http:Client clientEndpoint = new(address);
@@ -21,17 +23,18 @@ public function setMode(string mode) {
     modeValue = mode;
 }
 
-function getAddress() {
+function getAddress() returns string {
     string startpoint = io:readln("Enter startAddress: ");
     string endpoint = io:readln("Enter destination: ");
     boolean falseValue = true;
+    string resultMode = " ";
     while (falseValue) {
         if (startpoint != " ") {
             falseValue = false;
             startpoint = startpoint.replaceAll(" ", "+");
             endpoint = endpoint.replaceAll(" ", "+");
             setAddress(startpoint, endpoint);
-            findMode();
+            resultMode = findMode();
 
         }
         else
@@ -41,10 +44,11 @@ function getAddress() {
             endpoint = io:readln("Enter destination: ");
 
         }}
+    return resultMode;
 
 }
 
-public function findMode() {
+public function findMode() returns string {
     var response = clientEndpoint->get("/json?origin=" + startAddress + "&destination=" + destination +
             "&mode=transit&key="
             + key);
@@ -54,11 +58,13 @@ public function findMode() {
             io:println(" ");
             io:println("Select the mode from");
             io:println(responseLoad.available_travel_modes.toString());
+            return responseLoad.available_travel_modes.toString();
         }
 
     } else if (response is error) {
         log:printError("Get request failed", err = response);
     }
+    return " ";
 
 }
 

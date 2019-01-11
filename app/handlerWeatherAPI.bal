@@ -46,7 +46,7 @@ public function getTotalTime(string[][] inputArray) returns int[] {
     return resultTime;
 }
 
-public function findBadWeather(string[] weather, int[] duration) {
+public function findBadWeather(string[] weather, int[] duration) returns string {
     int weatherLength = weather.length();
     int durationLength = duration.length();
     string finalResult = "enjoy happy journey in nice day.";
@@ -89,5 +89,5 @@ public function findBadWeather(string[] weather, int[] duration) {
         }
     }
     finalResult = finalResult + " With expected journey time of " + duration[0] + " mins";
-    io:println(finalResult);
+    return finalResult;
 }

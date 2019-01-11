@@ -1,17 +1,20 @@
 import ballerina/io;
 
+// This bal runs the main function to interact with user
 
 public function main() {
-    getAddress();
+    string finalModes = getAddress();
     string val = io:readln("Enter Mode: ");
     var modeVal = string.convert(val);
     boolean falseValue = true;
     while (falseValue) {
-        if (modeVal == " ") {
+        if (modeVal == "") {
             io:println("Enter proper value for modeVal \n");
             val = io:readln("Enter Mode: ");
+            modeVal = string.convert(val);
         }
-        else
+
+        else if (finalModes.contains(modeVal.toUpper()))
         {
             falseValue = false;
             string[][][] routes = findRoute(modeVal, 0);
@@ -21,7 +24,8 @@ public function main() {
                 while (i < routeLength) {
                     string[] weatherForcast = getWeatherTotalPrediction(routes[i]);
                     int[] timeArray = getTotalTime(routes[i]);
-                    findBadWeather(weatherForcast, timeArray);
+                    string finalSummary = findBadWeather(weatherForcast, timeArray);
+                    io:println(finalSummary);
                     io:println();
                     i = i + 1;
                 }
@@ -44,7 +48,8 @@ public function main() {
                                 while (i < newrouteLength) {
                                     string[] weatherForcast = getWeatherTotalPrediction(newroutes[i]);
                                     int[] timeArray = getTotalTime(newroutes[i]);
-                                    findBadWeather(weatherForcast, timeArray);
+                                    string finalSummary = findBadWeather(weatherForcast, timeArray);
+                                    io:println(finalSummary);
                                     io:println();
                                     i = i + 1;
                                 }
@@ -63,10 +68,15 @@ public function main() {
                 }
             } else {
                 io:println("NO routes is selected. Please enter more specific address");
-                getAddress();
+                finalModes = getAddress();
                 val = io:readln("Enter Mode: ");
                 falseValue = true;
             }
+        }
+        else {
+            io:println("Select proper value for modeVal \n");
+            val = io:readln("Enter Mode: ");
+            modeVal = string.convert(val);
         }
 
     }
