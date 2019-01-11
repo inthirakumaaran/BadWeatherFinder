@@ -2,6 +2,7 @@ import ballerina/io;
 import ballerina/http;
 import ballerina/log;
 
+// This bal handle the weather forcast with darksky.net
 
 string weatherAddress = "https://api.darksky.net/forecast";
 string weatherApiKey = weatherAPIKey;
