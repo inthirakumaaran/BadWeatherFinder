@@ -3,7 +3,6 @@ import ballerina/io;
 
 public function main() {
     getAddress();
-    //findMode();
     string val = io:readln("Enter Mode: ");
     var modeVal = string.convert(val);
     boolean falseValue = true;

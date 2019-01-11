@@ -15,7 +15,6 @@ public function getWeatherResult(string latitude, string longtitude, string time
         var responseLoad = response.getJsonPayload();
         if (responseLoad is json) {
             result = responseLoad.currently.icon.toString();
-            //io:println(result);
         }
     }
     return result;
@@ -29,7 +28,6 @@ public function getWeatherTotalPrediction(string[][] inputArray) returns string[
         results[i] = getWeatherResult(inputArray[i][0], inputArray[i][1], inputArray[i][2]);
         i = i + 1;
     }
-    //io:println(results);
     return results;
 
 }
@@ -45,7 +43,6 @@ public function getTotalTime(string[][] inputArray) returns int[] {
         }
         i = i + 1;
     }
-    //io:println(resultTime);
     return resultTime;
 }
 
@@ -70,7 +67,6 @@ public function findBadWeather(string[] weather, int[] duration) {
         }
 
         if (rainTime > 0) {
-            //io:println("raining time is :"+ rainTime);
             int rainPercentage = (rainTime * 100 / duration[0]);
             if (rainPercentage > 100) {
                 rainPercentage = 100;

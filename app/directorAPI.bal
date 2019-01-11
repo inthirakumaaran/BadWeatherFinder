@@ -45,14 +45,10 @@ function getAddress() {
 }
 
 public function findMode() {
-    // Send a GET request to the Hello World service endpoint.
-    //io:println(startAddress + " to " + destination);
-    //setAddress("Wellawatte,Colombo,SriLanka", "Bambalpittiya,colombo,SriLanka");
     var response = clientEndpoint->get("/json?origin=" + startAddress + "&destination=" + destination +
             "&mode=transit&key="
             + key);
     if (response is http:Response) {
-        //io:println(response.getJsonPayload());
         var responseLoad = response.getJsonPayload();
         if (responseLoad is json) {
             io:println(" ");
@@ -75,10 +71,8 @@ public function findRoute(string modeVal, int delay) returns @untainted string[]
     var response = clientEndpoint->get("/json?origin=" + startAddress + "&destination=" + destination +
             "&mode=" + modeValue + "&key=" + key);
     if (response is http:Response) {
-        //io:println(response.getJsonPayload());
         var responseLoad = response.getJsonPayload();
         if (responseLoad is json) {
-            //io:println(responseLoad.available_travel_modes.toString());
             json route = responseLoad.routes;
             int l = route.length();
             int i = 0;
@@ -91,24 +85,24 @@ public function findRoute(string modeVal, int delay) returns @untainted string[]
                 io:println(" ");
                 string[][] geoPoints = [];
                 while (j < legLength) {
+
                     geoPoints = [];
                     time:Time time = time:currentTime();
                     int currentTimeMills = (time.time / 1000);
                     if (delay > 0) {
                         currentTimeMills = currentTimeMills + delay;
                     }
-                    //io:println(calculateCurrentTime(leg[j].duration.text.toString(), currentTimeMills));
+
                     string[] startpoint = [leg[j].start_location.lat.toString(), leg[j].start_location.lng.toString(),
                     string.convert(currentTimeMills), string.convert(calculateTime(leg[j].duration.text.toString()))];
 
                     geoPoints[0] = startpoint;
-                    //geoPoints[1] = endpoint;
+
                     json step = leg[j].steps;
                     int stepLength = step.length();
                     int k = 0;
-                    //io:println(geoPoints);
+
                     while (k < stepLength) {
-                        //
 
                         currentTimeMills = calculateCurrentTime(step[k].duration.text.toString(), currentTimeMills);
                         string[] endpoint1 = [step[k].end_location.lat.toString(), step[k].end_location.lng.toString(),
@@ -120,13 +114,9 @@ public function findRoute(string modeVal, int delay) returns @untainted string[]
 
                     }
 
-                    //io:println();
-                    //io:println(geoPoints);
-                    //io:println(geoPoints.length());
                     geoRoutes[i] = geoPoints;
                     j = j + 1;
                 }
-                //io:println(responseLoad.routes[i].summary.toString());
                 i = i + 1;
             }
             return geoRoutes;
@@ -168,21 +158,8 @@ public function calculateCurrentTime(string time, int currentTime) returns int {
     int finalValue = currentTime;
     int timevalue = calculateTime(time);
     finalValue = currentTime + calculateTime(time);
-    //io:println("given time is: " + time + " calculated time is: " + timevalue + " final value is: " + finalValue);
     return finalValue;
 
 }
 
-//public function main() {
-//    getAddress();
-//    //findMode();
-//    string val = io:readln("Enter Mode: ");
-//    var modeVal = string.convert(val);
-//    findRoute(modeVal);
-//    //if (modeVal is string) {
-//    //    findRoute(modeVal);
-//    //} else {
-//    //    io:println("Invalid choice \n");
-//    //}
-//}
 
