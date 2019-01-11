@@ -1,4 +1,4 @@
-# BadWeatherFinder
+# RouteWeatherFinder
 The project idea is to predict bad weather conditions between two travel points.
 Normally, we easily select the route between two places without taking the weather into consideration. 
 However, the weather is an important feature for travelling and transporting.
