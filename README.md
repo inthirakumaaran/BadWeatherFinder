@@ -13,14 +13,16 @@ References :
 * [2] Darksky weather API: https://darksky.net/dev/docs
 
 **To Run:**
-1. Go to API config file in app directory and insert your api keys(optional)
-2. Go to the root file
-3. Type "ballerina run app" to start the application
-4. Enter the start address and destination address
-5. Select the mode from given option
-6. For available routes weather prediction will be shown
-7. If needed journey can be delayed and new weather prediction for that period can be seen
+1. Go to API config file in app directory and insert your api keys(optional).
+2. Go to the root file.
+3. Type "ballerina run app" to start the application.
+4. Enter the start address and destination address.
+5. Select the mode from given option.
+6. For available routes weather prediction will be shown.
+7. If needed journey can be delayed and new weather prediction for that period can be seen.
 
 
+**Example**
 
+see [Example](Example.md) for sample queries and responses.
 
